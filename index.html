@@ -2499,15 +2499,17 @@ section {
 
 /* Fotos reales — reemplaza SVGs placeholder con imágenes de Unsplash via picsum */
 (function () {
+  var base = 'https://images.unsplash.com/photo-';
+  var q    = '?w=1200&q=85&fit=crop&auto=format';
   var fotos = [
-    { titulo: 'Mesa de Comedor Industrial',    url: 'https://picsum.photos/seed/wooden-dining-table/1200/720'   },
-    { titulo: 'Placard Corredera Premium',      url: 'https://picsum.photos/seed/wardrobe-sliding-door/600/900' },
-    { titulo: 'Escritorio Industrial',          url: 'https://picsum.photos/seed/industrial-desk-wood/800/500'  },
-    { titulo: 'Quincho Integrado',              url: 'https://picsum.photos/seed/outdoor-pergola-patio/800/500' },
-    { titulo: 'Estantería Industrial Flotante', url: 'https://picsum.photos/seed/wall-shelving-loft/600/900'    },
-    { titulo: 'Remodelación Interior Completa', url: 'https://picsum.photos/seed/modern-living-room/1000/500'   },
-    { titulo: 'Banco Industrial',               url: 'https://picsum.photos/seed/wooden-bench-metal/600/400'    },
-    { titulo: 'Quincho Premium con Parrilla',   url: 'https://picsum.photos/seed/outdoor-bbq-fire/600/400'      }
+    { titulo: 'Mesa de Comedor Industrial',    url: base + '1683120924965-7a38795dd923' + q },
+    { titulo: 'Placard Corredera Premium',      url: base + '1674815329032-421d305ad589' + q },
+    { titulo: 'Escritorio Industrial',          url: base + '1596025591889-5e1e35729485' + q },
+    { titulo: 'Quincho Integrado',              url: base + '1755612139813-880efb562f72' + q },
+    { titulo: 'Estantería Industrial Flotante', url: base + '1662379940109-1026a0dcfe95' + q },
+    { titulo: 'Remodelación Interior Completa', url: base + '1724582586529-62622e50c0b3' + q },
+    { titulo: 'Banco Industrial',               url: base + '1681449856018-44989916a3f1' + q },
+    { titulo: 'Quincho Premium con Parrilla',   url: base + '1741277692325-0071549d7f3e' + q }
   ];
 
   fotos.forEach(function (item) {
@@ -2523,7 +2525,7 @@ section {
   /* Foto sección Sobre Nosotros */
   var aboutImg = document.querySelector('.about-img');
   if (aboutImg) {
-    aboutImg.style.backgroundImage    = "url('https://picsum.photos/seed/carpentry-workshop/800/1000')";
+    aboutImg.style.backgroundImage    = "url('https://images.unsplash.com/photo-1664300494539-313eac2a6095?w=800&q=85&fit=crop&auto=format')";
     aboutImg.style.backgroundSize     = 'cover';
     aboutImg.style.backgroundPosition = 'center';
     var svgAbout = aboutImg.querySelector('svg');
