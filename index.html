@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Orimar Concepto — Diseño y construcción de muebles estilo industrial y remodelación de hogares en Laboulaye, Córdoba, Argentina.">
+<title>Orimar Concepto — Diseño &amp; Construcción de Espacios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   VARIABLES & RESET
+   ============================================================ */
+:root {
+  --black:    #0d0d0d;
+  --dark:     #111111;
+  --surface:  #1a1a1a;
+  --surface2: #222222;
+  --metal:    #b0b0b0;
+  --metal2:   #787878;
+  --copper:   #c8843a;
+  --copper2:  #e09c4a;
+  --white:    #f0ede8;
+  --white2:   #c8c4bc;
+  --gap:      clamp(1.5rem, 4vw, 3rem);
+  --radius:   2px;
+  --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ============================================================
+   GRAIN OVERLAY
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.035;
+}
+
+/* ============================================================
+   TYPOGRAPHY HELPERS
+   ============================================================ */
+.label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.display {
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+}
+
+.subheading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  transition: background var(--transition), padding var(--transition);
+}
+
+.nav.scrolled {
+  background: rgba(13,13,13,0.96);
+  backdrop-filter: blur(12px);
+  padding: 0.85rem 2rem;
+  border-bottom: 1px solid rgba(200,132,58,0.18);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.nav-logo span {
+  color: var(--copper);
+  font-size: 0.7em;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--metal);
+  transition: color var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--copper);
+  transition: width var(--transition);
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--copper) !important;
+  color: var(--black) !important;
+  padding: 0.5rem 1.2rem;
+  font-weight: 700 !important;
+  transition: background var(--transition) !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--copper2) !important; color: var(--black) !important; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.nav-burger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--white);
+  transition: var(--transition);
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 890;
+  background: rgba(13,13,13,0.98);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  transition: color var(--transition);
+}
+.mobile-menu a:hover { color: var(--copper); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 6rem 1.5rem 4rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(13,13,13,0.0) 0%, rgba(13,13,13,0.7) 60%, var(--black) 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 59px,
+      rgba(255,255,255,0.03) 59px,
+      rgba(255,255,255,0.03) 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 59px,
+      rgba(255,255,255,0.03) 59px,
+      rgba(255,255,255,0.03) 60px
+    ),
+    radial-gradient(ellipse 80% 60% at 50% 40%, #2a1a0a 0%, #0d0d0d 70%);
+  z-index: 0;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 40% 30% at 70% 30%, rgba(200,132,58,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 20% 70%, rgba(200,132,58,0.07) 0%, transparent 70%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--copper);
+  opacity: 0.6;
+}
+
+.hero-title {
+  font-size: clamp(4rem, 14vw, 11rem);
+  color: var(--white);
+  margin-bottom: 0.1em;
+}
+
+.hero-title em {
+  color: var(--copper);
+  font-style: normal;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  color: var(--metal);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+
+.hero-desc {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--white2);
+  max-width: 480px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--copper);
+  color: var(--black);
+}
+.btn-primary:hover { background: var(--copper2); transform: translateY(-2px); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(240,237,232,0.25);
+}
+.btn-ghost:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+  transform: translateY(-2px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.5;
+}
+
+.hero-scroll span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--metal);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--copper), transparent);
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+/* ============================================================
+   SECTION WRAPPER
+   ============================================================ */
+section {
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.2rem, 5vw, 4rem);
+}
+
+.section-header {
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.section-title {
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  color: var(--white);
+  line-height: 0.9;
+}
+
+.section-title em {
+  color: var(--copper);
+  font-style: normal;
+}
+
+.section-line {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--copper);
+  margin: 1.2rem 0;
+}
+
+.section-body {
+  max-width: 520px;
+  color: var(--metal);
+  font-size: 1.05rem;
+}
+
+/* ============================================================
+   SOBRE NOSOTROS
+   ============================================================ */
+.about {
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  right: -10%;
+  top: -20%;
+  width: 50%;
+  height: 140%;
+  background: radial-gradient(ellipse at center, rgba(200,132,58,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: center;
+}
+
+.about-image-block {
+  position: relative;
+}
+
+.about-img {
+  aspect-ratio: 4/5;
+  background:
+    linear-gradient(135deg, rgba(200,132,58,0.15) 0%, rgba(13,13,13,0.9) 100%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(176,176,176,0.04) 0px,
+      rgba(176,176,176,0.04) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  border: 1px solid rgba(200,132,58,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.about-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: rgba(200,132,58,0.3);
+}
+
+.about-img-placeholder svg {
+  width: 64px;
+  height: 64px;
+}
+
+.about-img-placeholder p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(200,132,58,0.4);
+}
+
+.about-badge {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  width: 120px;
+  height: 120px;
+  background: var(--copper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-badge strong {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  color: var(--black);
+  line-height: 1;
+}
+
+.about-badge span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+  opacity: 0.75;
+}
+
+.about-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.about-value {
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(176,176,176,0.1);
+  border-left: 3px solid var(--copper);
+  background: rgba(255,255,255,0.02);
+  transition: var(--transition);
+}
+
+.about-value:hover {
+  background: rgba(200,132,58,0.06);
+  border-left-color: var(--copper2);
+}
+
+.about-value h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.3rem;
+}
+
+.about-value p {
+  font-size: 0.92rem;
+  color: var(--metal2);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   SERVICIOS
+   ============================================================ */
+.services {
+  background: var(--black);
+  position: relative;
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5px;
+  background: rgba(176,176,176,0.08);
+  border: 1px solid rgba(176,176,176,0.08);
+}
+
+.service-card {
+  background: var(--black);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: background var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--copper);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { background: var(--surface); }
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--copper);
+  flex-shrink: 0;
+}
+
+.service-number {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  color: rgba(176,176,176,0.06);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.service-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.service-card p {
+  color: var(--metal2);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.service-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.service-card ul li {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--metal2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.service-card ul li::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 1px;
+  background: var(--copper);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   PORTFOLIO
+   ============================================================ */
+.portfolio {
+  background: var(--dark);
+}
+
+.portfolio-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.portfolio-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid rgba(176,176,176,0.2);
+  background: transparent;
+  color: var(--metal);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--copper);
+  color: var(--black);
+  border-color: var(--copper);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 180px;
+  gap: 6px;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--surface);
+}
+
+.p-span-4  { grid-column: span 4; }
+.p-span-6  { grid-column: span 6; }
+.p-span-8  { grid-column: span 8; }
+.p-span-3  { grid-column: span 3; }
+.p-row-2   { grid-row: span 2; }
+.p-row-3   { grid-row: span 3; }
+
+.portfolio-thumb {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.portfolio-item:hover .portfolio-thumb { transform: scale(1.07); }
+
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.1) 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.2rem 1.4rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+.portfolio-overlay h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.portfolio-overlay span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.ph-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+}
+
+.ph-pattern-mesh {
+  background:
+    repeating-linear-gradient(0deg, rgba(200,132,58,0.4) 0px, rgba(200,132,58,0.4) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, rgba(200,132,58,0.4) 0px, rgba(200,132,58,0.4) 1px, transparent 1px, transparent 24px);
+}
+
+.ph-pattern-diag {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(176,176,176,0.3) 0px,
+    rgba(176,176,176,0.3) 1px,
+    transparent 1px,
+    transparent 18px
+  );
+}
+
+.ph-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.ph-label svg { width: 36px; height: 36px; color: rgba(200,132,58,0.25); }
+
+.ph-label p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(200,132,58,0.3);
+}
+
+.ph-1 { background: linear-gradient(135deg, #2a1a0a 0%, #1a1008 100%); }
+.ph-2 { background: linear-gradient(135deg, #1a1a1a 0%, #111 100%); }
+.ph-3 { background: linear-gradient(135deg, #0f0f0f 0%, #1c1208 100%); }
+.ph-4 { background: linear-gradient(135deg, #111 0%, #1e1408 100%); }
+.ph-5 { background: linear-gradient(135deg, #1a1208 0%, #0d0d0d 100%); }
+.ph-6 { background: linear-gradient(135deg, #141414 0%, #1a1208 100%); }
+.ph-7 { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); }
+.ph-8 { background: linear-gradient(135deg, #1e1408 0%, #111 100%); }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials {
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials::before {
+  content: '"';
+  position: absolute;
+  top: -2rem;
+  left: 2rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30vw;
+  color: rgba(200,132,58,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  padding: 2rem 1.8rem;
+  border: 1px solid rgba(176,176,176,0.1);
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: var(--transition);
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--copper);
+  transition: width var(--transition);
+}
+
+.testimonial-card:hover::before { width: 100%; }
+.testimonial-card:hover { background: rgba(255,255,255,0.04); }
+
+.stars {
+  display: flex;
+  gap: 3px;
+  color: var(--copper);
+  font-size: 0.9rem;
+}
+
+.testimonial-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--white2);
+  font-style: italic;
+  flex: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.author-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 2px solid rgba(200,132,58,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  color: var(--copper);
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.author-location {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--metal2);
+}
+
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+.contact {
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: start;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contact-detail-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(200,132,58,0.1);
+  border: 1px solid rgba(200,132,58,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--copper);
+}
+
+.contact-detail-icon svg { width: 20px; height: 20px; }
+
+.contact-detail-text strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.25rem;
+}
+
+.contact-detail-text p,
+.contact-detail-text a {
+  font-size: 1rem;
+  color: var(--white2);
+  transition: color var(--transition);
+}
+.contact-detail-text a:hover { color: var(--copper); }
+
+.contact-social {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid rgba(176,176,176,0.18);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--metal);
+  transition: var(--transition);
+}
+
+.social-link svg { width: 16px; height: 16px; }
+
+.social-link:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+  background: rgba(200,132,58,0.06);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(176,176,176,0.15);
+  color: var(--white);
+  padding: 0.85rem 1rem;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color var(--transition), background var(--transition);
+  outline: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--metal2);
+  opacity: 0.6;
+}
+
+.form-group select option { background: var(--surface); color: var(--white); }
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--copper);
+  background: rgba(200,132,58,0.04);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-ok {
+  display: none;
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0.1em;
+  color: var(--copper);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: #080808;
+  border-top: 1px solid rgba(200,132,58,0.15);
+  padding: 3rem clamp(1.2rem, 5vw, 4rem);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(176,176,176,0.08);
+  margin-bottom: 2rem;
+}
+
+.footer-brand .footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.footer-brand .footer-logo span { color: var(--copper); }
+
+.footer-brand .footer-tagline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--metal2);
+  margin-bottom: 1.2rem;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  color: var(--metal2);
+  line-height: 1.65;
+  max-width: 300px;
+}
+
+.footer-col h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 1.2rem;
+}
+
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.footer-col ul li a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--metal2);
+  transition: color var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-col ul li a::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 1px;
+  background: var(--copper);
+  opacity: 0.5;
+}
+
+.footer-col ul li a:hover { color: var(--copper); }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--metal2);
+}
+
+.footer-craft { color: var(--copper); opacity: 0.7; }
+
+/* ============================================================
+   WHATSAPP FLOAT
+   ============================================================ */
+.wa-float {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 9999;
+  filter: drop-shadow(0 4px 24px rgba(37,211,102,0.3));
+  transition: filter var(--transition);
+}
+
+.wa-float:hover { filter: drop-shadow(0 6px 32px rgba(37,211,102,0.5)); }
+
+.wa-float a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #25D366;
+  color: white;
+  padding: 0.8rem 1.4rem 0.8rem 0.9rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 60px;
+  white-space: nowrap;
+  transition: background var(--transition);
+}
+
+.wa-float a:hover { background: #1fba58; }
+
+.wa-float svg { width: 26px; height: 26px; flex-shrink: 0; }
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: rgba(0,0,0,0.95);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox-content {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--transition);
+}
+.lightbox-close:hover { opacity: 1; color: var(--copper); }
+
+.lightbox-thumb-area {
+  width: 100%;
+  aspect-ratio: 16/10;
+  position: relative;
+}
+
+.lightbox-caption {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.lightbox-caption h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--white);
+}
+
+.lightbox-caption p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(200,132,58,0.3);
+  color: var(--white);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.2rem;
+}
+
+.lightbox-nav:hover { background: var(--copper); color: var(--black); }
+.lightbox-prev { left: -60px; }
+.lightbox-next { right: -60px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .about-inner,
+  .contact-inner { grid-template-columns: 1fr; }
+  .about-image-block { display: none; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+  .portfolio-grid { grid-template-columns: repeat(6, 1fr); }
+  .p-span-4 { grid-column: span 3; }
+  .p-span-6 { grid-column: span 6; }
+  .p-span-8 { grid-column: span 6; }
+  .p-span-3 { grid-column: span 3; }
+  .lightbox-prev { left: -10px; }
+  .lightbox-next { right: -10px; }
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .portfolio-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+  .p-span-4, .p-span-6, .p-span-8, .p-span-3 { grid-column: span 1; }
+  .p-span-8:first-child { grid-column: span 2; }
+  .p-row-2, .p-row-3 { grid-row: span 1; }
+  .about-badge { display: none; }
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .about-values { grid-template-columns: 1fr; }
+  .wa-float a { padding: 0.85rem; border-radius: 50%; }
+  .wa-float a span { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav-logo">
+    ORIMAR
+    <span>Concepto</span>
+  </div>
+  <div class="nav-links">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#portfolio">Trabajos</a>
+    <a href="#testimonios">Rese&ntilde;as</a>
+    <a href="#contacto" class="nav-cta">Contactar</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Men&uacute;">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#nosotros" class="mobile-link">Nosotros</a>
+  <a href="#servicios" class="mobile-link">Servicios</a>
+  <a href="#portfolio" class="mobile-link">Trabajos</a>
+  <a href="#testimonios" class="mobile-link">Rese&ntilde;as</a>
+  <a href="#contacto" class="mobile-link">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">
+      <span class="label">Laboulaye, C&oacute;rdoba</span>
+    </div>
+    <h1 class="hero-title display reveal reveal-delay-1">
+      ORIMAR<br><em>CONCEPTO</em>
+    </h1>
+    <p class="hero-sub subheading reveal reveal-delay-2">
+      Dise&ntilde;o &amp; Construcci&oacute;n de Espacios
+    </p>
+    <p class="hero-desc reveal reveal-delay-3">
+      Muebles a medida, placards y remodelaciones con la est&eacute;tica del acero, la madera y el cemento. Cada pieza, una obra.
+    </p>
+    <div class="hero-actions reveal reveal-delay-4">
+      <a href="https://wa.me/5492XXX000000?text=Hola!%20Quisiera%20consultar%20sobre%20sus%20servicios." target="_blank" rel="noopener" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Consultar por WhatsApp
+      </a>
+      <a href="#portfolio" class="btn btn-ghost">Ver trabajos</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section class="about" id="nosotros">
+  <div class="about-inner">
+    <div class="about-image-block reveal">
+      <div class="about-img">
+        <div class="ph-pattern ph-pattern-mesh"></div>
+        <div class="about-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+          <p>Foto del taller / equipo</p>
+        </div>
+      </div>
+      <div class="about-badge">
+        <strong>10+</strong>
+        <span>a&ntilde;os de experiencia</span>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <div class="reveal">
+        <p class="label">Sobre nosotros</p>
+        <div class="section-line"></div>
+        <h2 class="display section-title">TRABAJO<br>HECHO <em>A MANO</em></h2>
+      </div>
+      <p class="section-body reveal reveal-delay-1" style="margin-bottom:1.5rem;">
+        Orimar Concepto nace de la pasi&oacute;n por transformar espacios con materiales nobles y dise&ntilde;o sin compromisos. Ubicados en Laboulaye, C&oacute;rdoba, dise&ntilde;amos y fabricamos muebles de estilo industrial que combinan funcionalidad, durabilidad y una est&eacute;tica que habla sola.
+      </p>
+      <p class="section-body reveal reveal-delay-2">
+        Cada proyecto es &uacute;nico: desde una mesa con patas de hierro negro hasta la remodelaci&oacute;n completa de un quincho. Trabajamos con madera maciza, hierro, melamina y cemento alisado, siempre con el cliente en el centro del proceso.
+      </p>
+      <div class="about-values">
+        <div class="about-value reveal reveal-delay-1">
+          <h4>Dise&ntilde;o a medida</h4>
+          <p>Nada de cat&aacute;logo. Cada pieza se dise&ntilde;a para el espacio y el cliente.</p>
+        </div>
+        <div class="about-value reveal reveal-delay-2">
+          <h4>Materiales reales</h4>
+          <p>Madera maciza, hierro forjado y acabados premium de larga duraci&oacute;n.</p>
+        </div>
+        <div class="about-value reveal reveal-delay-3">
+          <h4>Entrega garantizada</h4>
+          <p>Cumplimos tiempos y plazos pactados con el cliente.</p>
+        </div>
+        <div class="about-value reveal reveal-delay-4">
+          <h4>Postventa</h4>
+          <p>Acompa&ntilde;amiento y seguimiento despu&eacute;s de finalizar cada trabajo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="services" id="servicios">
+  <div class="services-inner">
+    <div class="section-header">
+      <div class="reveal">
+        <p class="label">Lo que hacemos</p>
+        <div class="section-line"></div>
+        <h2 class="display section-title">NUESTROS<br><em>SERVICIOS</em></h2>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-number">01</span>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M20 7H4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V8a1 1 0 00-1-1z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        <h3>Muebles Industriales</h3>
+        <p>Dise&ntilde;o y fabricaci&oacute;n de muebles de estilo industrial a medida, combinando madera maciza y hierro con acabados &uacute;nicos.</p>
+        <ul>
+          <li>Mesas y escritorios</li>
+          <li>Bancos y sillas</li>
+          <li>Estanter&iacute;as y rack</li>
+          <li>Mesas de luz y c&oacute;modas</li>
+        </ul>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-number">02</span>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="3" width="7" height="18"/><rect x="14" y="3" width="7" height="18"/></svg>
+        <h3>Placards y Armarios</h3>
+        <p>Soluciones de guardado inteligente con dise&ntilde;o contempor&aacute;neo, puertas corredizas y acabados en melamina de alta gama.</p>
+        <ul>
+          <li>Placards a medida</li>
+          <li>Armarios empotrados</li>
+          <li>Rieles corredizos premium</li>
+          <li>Organizaci&oacute;n interior</li>
+        </ul>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-number">03</span>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <h3>Remodelaci&oacute;n de Hogares</h3>
+        <p>Transformamos espacios completos: quinchos, interiores y exteriores con revestimientos, instalaciones y terminaciones de calidad.</p>
+        <ul>
+          <li>Dise&ntilde;o de quinchos</li>
+          <li>Revestimientos y pisos</li>
+          <li>Iluminaci&oacute;n integrada</li>
+          <li>Instalaciones generales</li>
+        </ul>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-number">04</span>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        <h3>Dise&ntilde;o de Ambientes</h3>
+        <p>Asesoramiento y dise&ntilde;o integral del espacio: integraci&oacute;n de muebles, paleta de materiales, iluminaci&oacute;n y distribuci&oacute;n.</p>
+        <ul>
+          <li>Asesoramiento en dise&ntilde;o</li>
+          <li>Render y planos 2D</li>
+          <li>Selecci&oacute;n de materiales</li>
+          <li>Coordinaci&oacute;n de obra</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-inner">
+    <div class="section-header">
+      <div class="reveal">
+        <p class="label">Galer&iacute;a de trabajos</p>
+        <div class="section-line"></div>
+        <h2 class="display section-title">NUESTROS<br><em>PROYECTOS</em></h2>
+      </div>
+    </div>
+    <div class="portfolio-filter reveal reveal-delay-1">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="muebles">Muebles</button>
+      <button class="filter-btn" data-filter="placard">Placards</button>
+      <button class="filter-btn" data-filter="remodelar">Remodelaciones</button>
+      <button class="filter-btn" data-filter="quincho">Quinchos</button>
+    </div>
+    <div class="portfolio-grid reveal reveal-delay-2" id="portfolio-grid">
+      <div class="portfolio-item p-span-8 p-row-2 ph-1" data-category="muebles" data-title="Mesa de Comedor Industrial" data-cat-label="Muebles">
+        <div class="portfolio-thumb ph-1">
+          <div class="ph-pattern ph-pattern-mesh"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:48px;height:48px" aria-hidden="true"><path d="M20 7H4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V8a1 1 0 00-1-1z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+            <p>Mesa &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Muebles</span>
+          <h4>Mesa de Comedor Industrial</h4>
+        </div>
+      </div>
+      <div class="portfolio-item p-span-4 p-row-2 ph-2" data-category="placard" data-title="Placard Corredera Premium" data-cat-label="Placards">
+        <div class="portfolio-thumb ph-2">
+          <div class="ph-pattern ph-pattern-diag"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:40px;height:40px" aria-hidden="true"><rect x="3" y="3" width="7" height="18"/><rect x="14" y="3" width="7" height="18"/></svg>
+            <p>Placard &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Placards</span>
+          <h4>Placard Corredera Premium</h4>
+        </div>
+      </div>
+      <div class="portfolio-item p-span-4 ph-3" data-category="muebles" data-title="Escritorio Industrial" data-cat-label="Muebles">
+        <div class="portfolio-thumb ph-3">
+          <div class="ph-pattern ph-pattern-mesh"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:36px;height:36px" aria-hidden="true"><rect x="2" y="14" width="20" height="3"/><path d="M6 17v3M18 17v3M5 14V8h14v6"/></svg>
+            <p>Escritorio &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Muebles</span>
+          <h4>Escritorio Industrial</h4>
+        </div>
+      </div>
+      <div class="portfolio-item p-span-4 ph-4" data-category="quincho" data-title="Quincho Integrado" data-cat-label="Quinchos">
+        <div class="portfolio-thumb ph-4">
+          <div class="ph-pattern ph-pattern-diag"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:36px;height:36px" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            <p>Quincho &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Quinchos</span>
+          <h4>Quincho Integrado</h4>
+        </div>
+      </div>
+      <div class="portfolio-item p-span-4 p-row-2 ph-5" data-category="muebles" data-title="Estanter&iacute;a Industrial Flotante" data-cat-label="Muebles">
+        <div class="portfolio-thumb ph-5">
+          <div class="ph-pattern ph-pattern-mesh"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:36px;height:36px" aria-hidden="true"><path d="M4 2v20M20 2v20M4 8h16M4 14h16"/></svg>
+            <p>Estanter&iacute;a &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Muebles</span>
+          <h4>Estanter&iacute;a Industrial Flotante</h4>
+        </div>
+      </div>
+      <div class="portfolio-item p-span-6 ph-6" data-category="remodelar" data-title="Remodelaci&oacute;n Interior Completa" data-cat-label="Remodelaciones">
+        <div class="portfolio-thumb ph-6">
+          <div class="ph-pattern ph-pattern-diag"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:36px;height:36px" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <p>Interior &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Remodelaciones</span>
+          <h4>Remodelaci&oacute;n Interior Completa</h4>
+        </div>
+      </div>
+      <div class="portfolio-item p-span-3 ph-7" data-category="muebles" data-title="Banco Industrial" data-cat-label="Muebles">
+        <div class="portfolio-thumb ph-7">
+          <div class="ph-pattern ph-pattern-mesh"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:32px;height:32px" aria-hidden="true"><rect x="4" y="10" width="16" height="3"/><path d="M6 13v4M18 13v4"/></svg>
+            <p>Banco &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Muebles</span>
+          <h4>Banco Industrial</h4>
+        </div>
+      </div>
+      <div class="portfolio-item p-span-3 ph-8" data-category="quincho" data-title="Quincho Premium con Parrilla" data-cat-label="Quinchos">
+        <div class="portfolio-thumb ph-8">
+          <div class="ph-pattern ph-pattern-diag"></div>
+          <div class="ph-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:32px;height:32px" aria-hidden="true"><path d="M12 2L2 10v12h20V10z"/></svg>
+            <p>Quincho &mdash; foto del cliente</p>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <span>Quinchos</span>
+          <h4>Quincho Premium con Parrilla</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonials" id="testimonios">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <div class="reveal">
+        <p class="label">Lo que dicen nuestros clientes</p>
+        <div class="section-line"></div>
+        <h2 class="display section-title">RESE&Ntilde;AS<br><em>REALES</em></h2>
+      </div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;La mesa que nos hicieron es incre&iacute;ble. La combinaci&oacute;n de roble macizo con las patas de hierro negro qued&oacute; exactamente como lo hab&iacute;amos imaginado. Calidad y atenci&oacute;n excelentes.&rdquo;</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MG</div>
+          <div>
+            <div class="author-name">Martina Gonz&aacute;lez</div>
+            <div class="author-location">Laboulaye, C&oacute;rdoba</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;Remodelaron nuestro quincho de cero. El trabajo fue impecable, los tiempos se respetaron y el resultado super&oacute; las expectativas. Recomendados al cien por cien.&rdquo;</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RF</div>
+          <div>
+            <div class="author-name">Ricardo Fern&aacute;ndez</div>
+            <div class="author-location">General Deheza, C&oacute;rdoba</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;El placard a medida resolvi&oacute; todo el espacio del dormitorio. Puertas corredizas suaves, interior organizado y terminaci&oacute;n de primera. No contratar&iacute;a a nadie m&aacute;s para muebles.&rdquo;</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">LP</div>
+          <div>
+            <div class="author-name">Laura P&eacute;rez</div>
+            <div class="author-location">Laboulaye, C&oacute;rdoba</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;Encargu&eacute; un escritorio industrial para mi home office. En dos semanas lo ten&iacute;a instalado y funciona perfecto. El dise&ntilde;o es brutal, todos preguntan d&oacute;nde lo compr&eacute;.&rdquo;</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PS</div>
+          <div>
+            <div class="author-name">Pablo Su&aacute;rez</div>
+            <div class="author-location">Realic&oacute;, La Pampa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div>
+      <div class="section-header">
+        <div class="reveal">
+          <p class="label">Habl&eacute;mos de tu proyecto</p>
+          <div class="section-line"></div>
+          <h2 class="display section-title">CONTACT&Aacute;<br><em>CON NOSOTROS</em></h2>
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-detail reveal">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>WhatsApp</strong>
+            <a href="https://wa.me/5492XXX000000" target="_blank" rel="noopener">+54 9 2XX XXX-XXXX</a>
+          </div>
+        </div>
+        <div class="contact-detail reveal reveal-delay-1">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Ubicaci&oacute;n</strong>
+            <p>Laboulaye, C&oacute;rdoba, Argentina</p>
+          </div>
+        </div>
+        <div class="contact-detail reveal reveal-delay-2">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Horario</strong>
+            <p>Lunes a Viernes: 8:00 &mdash; 18:00<br>S&aacute;bados: 9:00 &mdash; 13:00</p>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <p class="label" style="margin-bottom:0.8rem;">Segu&iacute;nos</p>
+          <div class="contact-social">
+            <a href="https://instagram.com/orimarconcepto" target="_blank" rel="noopener" class="social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+              Instagram
+            </a>
+            <a href="https://orimario.mitiendanube.com" target="_blank" rel="noopener" class="social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+              Tienda Online
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form reveal reveal-delay-1" id="contact-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="tel">Tel&eacute;fono</label>
+          <input type="tel" id="tel" name="tel" placeholder="+54 9 ...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+      </div>
+      <div class="form-group">
+        <label for="servicio">Servicio de inter&eacute;s</label>
+        <select id="servicio" name="servicio">
+          <option value="">Seleccion&aacute; un servicio...</option>
+          <option value="muebles">Muebles industriales a medida</option>
+          <option value="placards">Placards y armarios</option>
+          <option value="remodelacion">Remodelaci&oacute;n de hogares</option>
+          <option value="diseno">Dise&ntilde;o de ambientes</option>
+          <option value="otro">Otro / Consulta general</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="mensaje">Cont&aacute;nos tu proyecto</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Describ&iacute; brevemente lo que necesit&aacute;s: dimensiones, materiales, espacio, etc." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="form-btn">
+        Enviar consulta
+      </button>
+      <p class="form-ok" id="form-ok">Consulta enviada. Te contactaremos a la brevedad.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">ORIMAR <span>CONCEPTO</span></div>
+      <p class="footer-tagline">Dise&ntilde;o &amp; Construcci&oacute;n de Espacios</p>
+      <p>Fabricamos muebles y remodelamos espacios con materiales de primera calidad. Dise&ntilde;o industrial, hecho a medida, desde Laboulaye, C&oacute;rdoba.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegaci&oacute;n</h4>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Sobre nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#portfolio">Proyectos</a></li>
+        <li><a href="#testimonios">Rese&ntilde;as</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Muebles Industriales</a></li>
+        <li><a href="#servicios">Placards y Armarios</a></li>
+        <li><a href="#servicios">Remodelaciones</a></li>
+        <li><a href="#servicios">Dise&ntilde;o de Ambientes</a></li>
+        <li><a href="https://orimario.mitiendanube.com" target="_blank" rel="noopener">Tienda Online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Orimar Concepto. Todos los derechos reservados.</p>
+    <p class="footer-craft">Laboulaye, C&oacute;rdoba, Argentina</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="wa-float">
+  <a href="https://wa.me/5492XXX000000?text=Hola!%20Me%20comunico%20desde%20el%20sitio%20web.%20Quisiera%20consultar%20sobre%20sus%20servicios." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galería ampliada">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightbox-close">&#x2715; Cerrar</button>
+    <button class="lightbox-nav lightbox-prev" id="lb-prev" aria-label="Anterior">&#8592;</button>
+    <button class="lightbox-nav lightbox-next" id="lb-next" aria-label="Siguiente">&#8594;</button>
+    <div class="lightbox-thumb-area" id="lb-thumb"></div>
+    <div class="lightbox-caption">
+      <h3 id="lb-title"></h3>
+      <p id="lb-cat"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* NAV scroll */
+  var nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* Mobile menu */
+  var burger = document.getElementById('nav-burger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', function () {
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(function (link) {
+    link.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
+  });
+
+  /* Scroll reveal */
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+
+  /* Hero reveal on load */
+  window.addEventListener('load', function () {
+    document.querySelectorAll('.hero .reveal').forEach(function (el) {
+      el.classList.add('visible');
+    });
+  });
+
+  /* Portfolio filter */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var portfolioItems = document.querySelectorAll('.portfolio-item');
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      portfolioItems.forEach(function (item) {
+        item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  /* Lightbox */
+  var lightbox  = document.getElementById('lightbox');
+  var lbThumb   = document.getElementById('lb-thumb');
+  var lbTitle   = document.getElementById('lb-title');
+  var lbCat     = document.getElementById('lb-cat');
+  var lbClose   = document.getElementById('lightbox-close');
+  var lbPrev    = document.getElementById('lb-prev');
+  var lbNext    = document.getElementById('lb-next');
+  var current   = [];
+  var idx       = 0;
+
+  function visibleItems() {
+    return Array.from(portfolioItems).filter(function (el) { return el.style.display !== 'none'; });
+  }
+
+  function showItem() {
+    var item = current[idx];
+    lbTitle.textContent = item.dataset.title || '';
+    lbCat.textContent   = item.dataset.catLabel || '';
+
+    /* Clone the thumbnail div safely — no untrusted HTML strings */
+    var thumb = item.querySelector('.portfolio-thumb');
+    var clone = thumb ? thumb.cloneNode(true) : document.createElement('div');
+    clone.style.cssText = 'position:absolute;inset:0;';
+    while (lbThumb.firstChild) { lbThumb.removeChild(lbThumb.firstChild); }
+    lbThumb.appendChild(clone);
+  }
+
+  function openAt(i) {
+    current = visibleItems();
+    idx = i;
+    showItem();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  portfolioItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      var vis = visibleItems();
+      openAt(vis.indexOf(item));
+    });
+  });
+
+  lbClose.addEventListener('click', close);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) { close(); } });
+
+  lbPrev.addEventListener('click', function () {
+    idx = (idx - 1 + current.length) % current.length;
+    showItem();
+  });
+
+  lbNext.addEventListener('click', function () {
+    idx = (idx + 1) % current.length;
+    showItem();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) { return; }
+    if (e.key === 'Escape')      { close(); }
+    if (e.key === 'ArrowLeft')   { lbPrev.click(); }
+    if (e.key === 'ArrowRight')  { lbNext.click(); }
+  });
+
+  /* Contact form */
+  var form   = document.getElementById('contact-form');
+  var formOk = document.getElementById('form-ok');
+  var formBtn = document.getElementById('form-btn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    formBtn.textContent = 'Enviando...';
+    formBtn.disabled = true;
+    setTimeout(function () {
+      formOk.style.display = 'block';
+      formBtn.textContent = 'Enviado';
+      form.reset();
+      setTimeout(function () {
+        formBtn.textContent = 'Enviar consulta';
+        formBtn.disabled = false;
+        formOk.style.display = 'none';
+      }, 5000);
+    }, 1000);
+  });
+
+}());
+</script>
+
+</body>
+</html>
