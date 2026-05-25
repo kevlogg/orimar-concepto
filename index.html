@@ -2496,6 +2496,40 @@ section {
   });
 
 }());
+
+/* Fotos reales — reemplaza SVGs placeholder con imágenes de Unsplash via picsum */
+(function () {
+  var fotos = [
+    { titulo: 'Mesa de Comedor Industrial',    url: 'https://picsum.photos/seed/wooden-dining-table/1200/720'   },
+    { titulo: 'Placard Corredera Premium',      url: 'https://picsum.photos/seed/wardrobe-sliding-door/600/900' },
+    { titulo: 'Escritorio Industrial',          url: 'https://picsum.photos/seed/industrial-desk-wood/800/500'  },
+    { titulo: 'Quincho Integrado',              url: 'https://picsum.photos/seed/outdoor-pergola-patio/800/500' },
+    { titulo: 'Estantería Industrial Flotante', url: 'https://picsum.photos/seed/wall-shelving-loft/600/900'    },
+    { titulo: 'Remodelación Interior Completa', url: 'https://picsum.photos/seed/modern-living-room/1000/500'   },
+    { titulo: 'Banco Industrial',               url: 'https://picsum.photos/seed/wooden-bench-metal/600/400'    },
+    { titulo: 'Quincho Premium con Parrilla',   url: 'https://picsum.photos/seed/outdoor-bbq-fire/600/400'      }
+  ];
+
+  fotos.forEach(function (item) {
+    var el = document.querySelector('[data-title="' + item.titulo + '"] .portfolio-thumb');
+    if (!el) { return; }
+    el.style.backgroundImage    = "url('" + item.url + "')";
+    el.style.backgroundSize     = 'cover';
+    el.style.backgroundPosition = 'center';
+    var svg = el.querySelector('svg');
+    if (svg) { svg.style.display = 'none'; }
+  });
+
+  /* Foto sección Sobre Nosotros */
+  var aboutImg = document.querySelector('.about-img');
+  if (aboutImg) {
+    aboutImg.style.backgroundImage    = "url('https://picsum.photos/seed/carpentry-workshop/800/1000')";
+    aboutImg.style.backgroundSize     = 'cover';
+    aboutImg.style.backgroundPosition = 'center';
+    var svgAbout = aboutImg.querySelector('svg');
+    if (svgAbout) { svgAbout.style.display = 'none'; }
+  }
+}());
 </script>
 
 </body>
